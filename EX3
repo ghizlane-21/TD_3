@@ -1,0 +1,103 @@
+
+#include <iostream>
+#include <list>
+#include <algorithm>
+
+using namespace std; // Utilisation de "using namespace std"
+
+int main() {
+    list<int> listeEntiers;
+    int entier;
+
+    char continuer;
+    do {
+        cout << "Entrez un entier : ";
+        cin >> entier;
+        listeEntiers.push_back(entier);
+
+        cout << "Voulez-vous ajouter un autre entier ? (O/N) : ";
+        cin >> continuer;
+    } while (continuer == 'O' || continuer == 'o');
+
+    // Tri à bulles
+    bool echange;
+    do {
+        echange = false;
+        for (auto it = listeEntiers.begin(); it != prev(listeEntiers.end()); ++it) {
+            auto suivant = next(it);
+            if (*it > *suivant) {
+                swap(*it, *suivant);
+                echange = true;
+            }
+        }
+    } while (echange);
+
+    cout << "Liste triée avec le tri à bulles : ";
+    for (const int& entier : listeEntiers) {
+        cout << entier << " ";
+    }
+    cout << endl;
+
+    // Réinitialisation de la liste
+    listeEntiers.clear();
+
+    // Tri par sélection
+    do {
+        cout << "Entrez un entier : ";
+        cin >> entier;
+        listeEntiers.push_back(entier);
+
+        cout << "Voulez-vous ajouter un autre entier ? (O/N) : ";
+        cin >> continuer;
+    } while (continuer == 'O' || continuer == 'o');
+
+    for (auto it = listeEntiers.begin(); it != prev(listeEntiers.end()); ++it) {
+        auto minimum = it;
+        for (auto j = next(it); j != listeEntiers.end(); ++j) {
+            if (*j < *minimum) {
+                minimum = j;
+            }
+        }
+        if (minimum != it) {
+            swap(*it, *minimum);
+        }
+    }
+
+    cout << "Liste triée avec le tri par sélection : ";
+    for (const int& entier : listeEntiers) {
+        cout << entier << " ";
+    }
+    cout << endl;
+
+    // Réinitialisation de la liste
+    listeEntiers.clear();
+
+    // Tri par insertion
+    do {
+        cout << "Entrez un entier : ";
+        cin >> entier;
+        listeEntiers.push_back(entier);
+
+        cout << "Voulez-vous ajouter un autre entier ? (O/N) : ";
+        cin >> continuer;
+    } while (continuer == 'O' || continuer == 'o');
+
+    for (auto it = next(listeEntiers.begin()); it != listeEntiers.end(); ++it) {
+        int valeur = *it;
+        auto j = prev(it);
+        while (j != listeEntiers.begin() && *j > valeur) {
+            *next(j) = *j;
+            --j;
+        }
+        *next(j) = valeur;
+    }
+
+    cout << "Liste triée avec le tri par insertion : ";
+    for (const int& entier : listeEntiers) {
+        cout << entier << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+}
