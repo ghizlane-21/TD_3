@@ -1,0 +1,68 @@
+
+#include <iostream>
+
+class vect {
+protected:
+    int nelem;
+    int* adr;
+
+public:
+    vect(int n) : nelem(n), adr(new int[n]) {}
+
+    ~vect() {
+        delete[] adr;
+    }
+
+    int& operator[](int index) {
+        return adr[index];
+    }
+};
+
+class vectok : public vect {
+public:
+    vectok(int n) : vect(n) {}
+
+    vectok(const vectok& other) : vect(other.nelem) {
+        for (int i = 0; i < nelem; i++) {
+            adr[i] = other.adr[i];
+        }
+    }
+
+    vectok& operator=(const vectok& other) {
+        if (this != &other) {
+            delete[] adr;
+            nelem = other.nelem;
+            adr = new int[nelem];
+            for (int i = 0; i < nelem; i++) {
+                adr[i] = other.adr[i];
+            }
+        }
+        return *this;
+    }
+
+    int taille() const {
+        return nelem;
+    }
+};
+
+int main() {
+    using namespace std;
+
+    vectok v1(5);
+    v1[0] = 10;
+    v1[1] = 20;
+
+    cout << "v1[0] = " << v1[0] << ", v1[1] = " << v1[1] << endl;
+    cout << "Taille de v1: " << v1.taille() << endl;
+
+    vectok v2 = v1; // Utilisation du constructeur par recopie
+    cout << "v2[0] = " << v2[0] << ", v2[1] = " << v2[1] << endl;
+    cout << "Taille de v2: " << v2.taille() << endl;
+
+    vectok v3(3);
+    v3 = v2; // Utilisation de l'opérateur d'affectation
+    cout << "v3[0] = " << v3[0] << ", v3[1] = " << v3[1] << endl;
+    cout << "Taille de v3: " << v3.taille() << endl;
+
+    return 0;
+}
