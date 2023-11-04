@@ -1,0 +1,44 @@
+
+#include <iostream>
+#include <set>
+#include <vector>
+#include <list>
+using namespace std;
+
+// 2
+template <typename T>
+bool recherche(const std::set<T>& set, T val) {
+    return s.count(valeur) > 0;
+}
+
+// 3
+template <typename I, typename T>
+bool recherche(I debut, I fin, T val) {
+    while (debut != fin) {
+        if (*debut == val) {
+            return true;
+        }
+        debut++;
+    }
+    return false;
+}
+
+int main() {
+    // 
+    set<int> set;
+    for (int i = 1; i <= 100; i++) {
+        set.insert(i);
+    }
+
+    // 
+    vector<double> vect = {1, 3, 2};
+    list<string> list = {"el", "ghizlane", "IDAI"};
+    char arr[] = {'a', 'b', 'c'};
+
+    cout << "est ce que 3 dans le set : " << recherche(set, 3) << endl;
+    cout << "est ce que 1 dans l'ensemble vecteur : " << recherche(vect.begin(), vect.end(), 1) << endl;
+    cout << " est ce que la filiere IDAI dans la liste  : " << recherche(list.begin(), list.end(), "IDAI") << endl;
+    cout << "TrouvE dans le tableau : " << recherche(begin(arr), end(arr), 'd') << endl;
+
+    return 0;
+}
