@@ -1,0 +1,79 @@
+EXERCICE 1 :
+#include <iostream>
+using namespace std ;
+class Complex {
+private:
+    double real;
+    double imag;
+public:
+    Complex(double re, double im) : real(re), imag(im) {}
+    Complex operator+(const Complex& other) const {
+        return Complex(real + other.real, imag + other.imag);
+    }
+
+    Complex operator-(const Complex& other) const {
+        return Complex(real - other.real, imag - other.imag);
+    }
+
+    Complex operator*(const Complex& other) const {
+        double newReal = (real * other.real) - (imag * other.imag);
+        double newImag = (real * other.imag) + (imag * other.real);
+        return Complex(newReal, newImag);
+    }
+
+    Complex operator/(const Complex& other) const {
+        double denominator = (other.real * other.real) + (other.imag * other.imag);
+        double newReal = ((real * other.real) + (imag * other.imag)) / denominator;
+        double newImag = ((imag * other.real) - (real * other.imag)) / denominator;
+        return Complex(newReal, newImag);
+    }
+
+    void display() {
+        cout << "Real: " << real << ", Imaginary: " << imag << endl;
+    }
+};
+
+int main() {
+    double real1, imag1, real2, imag2;
+   cout << "Entrez la partie reelle du  nombre complexe1 : ";
+   cin >> real1;
+    cout << "Entrez la partie imaginaire du  nombre complexe1 : ";
+    cin >> imag1;
+    cout << "Entrez la partie reelle du  nombre complexe2 : ";
+  cin >> real2;
+   cout << "Entrez la partie imaginaire du nombre complexe2 : ";
+    cin >> imag2;
+
+    Complex complex1(real1, imag1);
+    Complex complex2(real2, imag2);
+
+    char choice;
+  cout << "Entrez l'opération (+, -, *, /) : ";
+    cin >> choice;
+
+  
+    Complex resultat;
+
+    switch (choice) {
+    case '+':
+        resultat = complex1 + complex2;
+        break;
+    case '-':
+        resultat = complex1 - complex2;
+        break;
+    case '*':
+        resultat = complex1 * complex2;
+        break; 
+    case '/':
+        resultat = complex1 / complex2;
+        break;
+    default:
+        cout << "rien " << std::endl;
+        return 1;
+    }
+
+    cout << "resultat est : ";
+    resultat.display();
+
+    return 0;
+}
