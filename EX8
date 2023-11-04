@@ -1,0 +1,22 @@
+ex8
+#include <iostream>
+
+template <typename T>
+T carre(const T& valeur) {
+    return valeur * valeur;
+}
+
+using namespace std; // Utilisation de l'espace de noms std
+
+int main() {
+    int entier = 2;
+    double reel = 3.14;
+
+    // Utilisation de la fonction modele pour calculer le carre
+    int carreEntier = carre(entier);
+    double carreReel = carre(reel);
+
+    cout << "Le carre de " << entier << " est " << carreEntier << endl;
+    cout << "Le carre de " << reel << " est " << carreReel << endl;
+
+    return 0;
