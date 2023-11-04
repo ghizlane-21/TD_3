@@ -1,0 +1,2 @@
+
+Le programme crée des objets des classes A, B, et C, en appelant leurs constructeurs respectifs avec des valeurs par défaut ou spécifiées, affichant les messages de construction correspondants pour chaque classe, résultant en l'affichage des informations de chaque objet créé.
