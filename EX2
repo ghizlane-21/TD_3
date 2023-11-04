@@ -1,0 +1,52 @@
+ex2
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+struct Person {
+    string nom;
+    string prenom;
+    int age;
+};
+
+// Fonction pour comparer deux personnes en fonction de leur nom et prenom
+bool comparerPersonnes(const Person& personne1, const Person& personne2) {
+    if (personne1.nom == personne2.nom) {
+        return personne1.prenom < personne2.prenom;
+    }
+    return personne1.nom < personne2.nom;
+}
+
+int main() {
+    vector<Person> personnes;
+
+    char continuer;
+    do {
+        Person personne;
+        cout << "Entrez le nom : ";
+        cin >> personne.nom;
+        cout << "Entrez le prenom : ";
+        cin >> personne.prenom;
+        cout << "Entrez age : ";
+        cin >> personne.age;
+
+        personnes.push_back(personne);
+
+        cout << "ajouter une autre personne ? (O/N) : ";
+        cin >> continuer;
+    } while (continuer == 'O' || continuer == 'o');
+
+    sort(personnes.begin(), personnes.end(), comparerPersonnes);
+
+    cout << "Liste triee des personnes :\n";
+    for (const Person& personne : personnes) {
+        cout << "nom : " << personne.nom
+             << ", Prenom : " << personne.prenom
+             << ", age : " << personne.age << endl;
+    }
+
+    return 0;
+}
